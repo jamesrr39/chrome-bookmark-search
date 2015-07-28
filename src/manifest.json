@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "my-view",
+  "short_name": "my-view",
+  "description": "",
+  "version": "0.0.1",
+  "minimum_chrome_version": "38",
+	"browser_action": {
+		"default_icon": {
+			"16": "icons/my-view-16.png"
+		},
+		"default_title": "My View",
+		"default_popup": "index.html"
+	},
+	"permissions": [
+		"tabs",
+		"storage",
+		"bookmarks"
+	]
+}

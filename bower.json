@@ -1,0 +1,24 @@
+{
+  "name": "chrome-bookmarks-extension",
+  "version": "0.0.1",
+  "authors": [
+    "James Ralphs <jr.ralphs@gmail.com>"
+  ],
+  "description": "chrome bookmarks extension",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "chrome",
+    "bookmarks"
+  ],
+  "license": "GPL v2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "libs",
+    "test",
+    "tests"
+  ]
+}
