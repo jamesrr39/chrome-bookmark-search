@@ -31,9 +31,12 @@ module.exports = function(grunt) {
 			}
 		}
 	});
-	grunt.loadNpmTasks('grunt-jsbeautifier');
 
+	grunt.loadNpmTasks('grunt-jsbeautifier');
+	grunt.loadNpmTasks('grunt-bower-install-task');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+
+	grunt.registerTask('install',['bower_install']);
 
 
 };
