@@ -30,7 +30,7 @@ mainApp.factory("ChromeBookmarksFactory", function () {
 		function mergeFoldersIntoBookmarks(bookmarks, folders) {
 			return _.map(bookmarks, function (bookmark) {
 				var parentFolder,
-						parentFolders = [];
+					parentFolders = [];
 				(function setFolders(node) {
 					if (node.hasOwnProperty("parentId")) {
 						// todo - performance, does this need to be moved to a collection
@@ -64,7 +64,7 @@ mainApp.factory("ChromeBookmarksFactory", function () {
 		 */
 		function flatten(bookmarkSubTree) {
 			var bookmarks = [],
-					folders = [];
+				folders = [];
 			(function flatten(bookmarkSubTree) {
 				if (Array.isArray(bookmarkSubTree)) {
 					return bookmarkSubTree.map(function (bookmarkSubTreeChild) {
