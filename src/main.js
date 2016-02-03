@@ -1,9 +1,9 @@
 var mainApp = angular.module("bookmarksApp", []);
 
-mainApp.factory("MockBookmarksFactory", function() {
-	return function() {
+mainApp.factory("MockBookmarksFactory", function () {
+	return function () {
 		return {
-			fetch: function(callback, context) {
+			fetch: function (callback, context) {
 				var data = {
 					bookmarks: [{
 							url: "mockurl",
@@ -16,8 +16,8 @@ mainApp.factory("MockBookmarksFactory", function() {
 	};
 });
 
-mainApp.factory("ChromeBookmarksFactory", function() {
-	return function() {
+mainApp.factory("ChromeBookmarksFactory", function () {
+	return function () {
 
 		/**
 		 * Takes a list of bookmarks and folders and returns a modified list of the bookmarks.
@@ -28,13 +28,13 @@ mainApp.factory("ChromeBookmarksFactory", function() {
 		 * @returns {array} list of bookmarks with a new <code>folders</code> property
 		 */
 		function mergeFoldersIntoBookmarks(bookmarks, folders) {
-			return _.map(bookmarks, function(bookmark) {
+			return _.map(bookmarks, function (bookmark) {
 				var parentFolder,
 						parentFolders = [];
 				(function setFolders(node) {
 					if (node.hasOwnProperty("parentId")) {
 						// todo - performance, does this need to be moved to a collection
-						parentFolder = _.find(folders, function(folder) {
+						parentFolder = _.find(folders, function (folder) {
 							return folder.id === node.parentId;
 						});
 						if (parentFolder.title !== "" && parentFolder.title !== "Bookmarks bar") {
@@ -48,7 +48,8 @@ mainApp.factory("ChromeBookmarksFactory", function() {
 					folders: parentFolders
 				});
 			});
-		};
+		}
+		;
 
 
 		/**
@@ -66,7 +67,7 @@ mainApp.factory("ChromeBookmarksFactory", function() {
 					folders = [];
 			(function flatten(bookmarkSubTree) {
 				if (Array.isArray(bookmarkSubTree)) {
-					return bookmarkSubTree.map(function(bookmarkSubTreeChild) {
+					return bookmarkSubTree.map(function (bookmarkSubTreeChild) {
 						return flatten(bookmarkSubTreeChild);
 					});
 				} else if (bookmarkSubTree.hasOwnProperty("children")) {
@@ -83,11 +84,12 @@ mainApp.factory("ChromeBookmarksFactory", function() {
 				bookmarks: bookmarks,
 				folders: folders
 			};
-		};
-		
+		}
+		;
+
 		return {
-			fetch: function(callback, context) {
-				chrome.bookmarks.getTree(function(bookmarkTree) {
+			fetch: function (callback, context) {
+				chrome.bookmarks.getTree(function (bookmarkTree) {
 					callback.call(context || this, flatten(bookmarkTree));
 				});
 			}
@@ -95,16 +97,17 @@ mainApp.factory("ChromeBookmarksFactory", function() {
 	};
 });
 
-mainApp.controller('bookmarksController', function($scope, MockBookmarksFactory, ChromeBookmarksFactory) {
-	var bookmarks = window.chrome.bookmarks ? new ChromeBookmarksFactory() : new MockBookmarksFactory();
-	bookmarks.fetch(function(bookmarks) {
+mainApp.controller('bookmarksController', function ($scope, MockBookmarksFactory, ChromeBookmarksFactory) {
+	var bookmarks = chrome.bookmarks ? new ChromeBookmarksFactory() : new MockBookmarksFactory();
+	bookmarks.fetch(function (bookmarks) {
 		$scope.bookmarks = bookmarks.bookmarks;
-					console.log($scope.bookmarks);
+		console.log($scope.bookmarks);
 	}, this);
-	
-	$scope.openLinkInNewTab = function(event){
-		console.log(event);
-		return false;
+
+	$scope.openLinkInNewTab = function (url) {
+		chrome.tabs.create({
+			url: url
+		});
 	};
-	
+
 });
