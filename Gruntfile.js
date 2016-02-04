@@ -64,14 +64,10 @@ module.exports = function (grunt) {
 					template: require('grunt-template-jasmine-requirejs'),
 					templateOptions: {
 						requireConfig: requireConfig
-					},
-					vendor: [
-						"https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"
-					]
+					}
 				}
 			}
 		}
-
 	});
 
 	grunt.loadNpmTasks('grunt-jsbeautifier');
