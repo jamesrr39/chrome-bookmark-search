@@ -1,9 +1,9 @@
 module.exports = function (grunt) {
 
-	requireConfig = {
+	var requireConfig = {
 		baseUrl: "src",
 		paths: {
-			jquery: "libs/dist/jquery",
+			jquery: "libs/jquery/dist/jquery",
 			underscore: "libs/underscore/underscore"
 		}
 	};
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
 			tasks: ['jshint']
 		},
 		jsbeautifier: {
-			files: ["src/**/*.js", "!src/libs/**/*.js", "Gruntfile.js"],
+			files: ["**/*.js", "!src/libs/**/*.js", "**/*.json"],
 			options: {
 				html: {
 					indentChar: "	",
@@ -59,7 +59,7 @@ module.exports = function (grunt) {
 					},
 					vendor: [
 						"https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js",
-						"http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
+//						"src/libs/requirejs/require.js"
 					]
 				}
 			}
