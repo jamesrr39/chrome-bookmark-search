@@ -1,3 +1,4 @@
+/*jshint scripturl:true*/
 var mainApp = angular.module("bookmarksApp", []);
 
 mainApp.factory("MockBookmarksFactory", function () {
@@ -6,9 +7,9 @@ mainApp.factory("MockBookmarksFactory", function () {
 			fetch: function (callback, context) {
 				var data = {
 					bookmarks: [{
-							url: "mockurl",
-							title: "mocktitle"
-						}]
+						url: "mockurl",
+						title: "mocktitle"
+					}]
 				};
 				callback.call(context || this, data);
 			}
@@ -49,8 +50,6 @@ mainApp.factory("ChromeBookmarksFactory", function () {
 				});
 			});
 		}
-		;
-
 
 		/**
 		 * Flattens a bookmark structure from Chrome <code>bookmarks.getTree</code> API.
@@ -85,7 +84,6 @@ mainApp.factory("ChromeBookmarksFactory", function () {
 				folders: folders
 			};
 		}
-		;
 
 		return {
 			fetch: function (callback, context) {

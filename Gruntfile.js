@@ -8,10 +8,17 @@ module.exports = function (grunt) {
 		}
 	};
 
+	var jsFiles = ["src/**/*.js",
+		"!src/libs/**/*.js",
+		"tests/**/.js",
+		"*.js",
+		"*.json"
+	];
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		jshint: {
-			files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js', '!src/libs/**/*.js'],
+			files: jsFiles,
 			options: {
 				globals: {
 					jQuery: true
@@ -23,7 +30,7 @@ module.exports = function (grunt) {
 			tasks: ['jshint']
 		},
 		jsbeautifier: {
-			files: ["**/*.js", "!src/libs/**/*.js", "**/*.json"],
+			files: jsFiles,
 			options: {
 				html: {
 					indentChar: "	",
@@ -35,7 +42,8 @@ module.exports = function (grunt) {
 				},
 				js: {
 					indentChar: "	",
-					indentSize: 1
+					indentSize: 1,
+					"jslint-happy": true
 				}
 			}
 		},
@@ -58,8 +66,7 @@ module.exports = function (grunt) {
 						requireConfig: requireConfig
 					},
 					vendor: [
-						"https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js",
-//						"src/libs/requirejs/require.js"
+						"https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"
 					]
 				}
 			}
@@ -73,7 +80,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-	grunt.registerTask("test", ["jasmine"]);
+	grunt.registerTask("test", ["jasmine", "jshint"]);
 	grunt.registerTask("package", ["requirejs"]);
 
 	grunt.registerTask('install', ['bower_install']);
