@@ -29,6 +29,7 @@
 	},
 	"dependencies": {
 		"underscore": "~1.8.3",
-		"requirejs": "~2.1.22"
+		"requirejs": "~2.1.22",
+		"text": "requirejs-text#~2.0.14"
 	}
 }

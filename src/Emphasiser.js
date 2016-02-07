@@ -3,9 +3,23 @@
  * @returns {Function}
  */
 define([
-	"jquery",
-	"underscore"
-], function ($, _) {
+	"jquery"
+], function ($) {
+
+	var entityMap = {
+		"&": "&amp;",
+		"<": "&lt;",
+		">": "&gt;",
+		'"': '&quot;',
+		"'": '&#39;',
+		"/": '&#x2F;'
+	};
+
+	function escapeHtml(string) {
+		return String(string).replace(/[&<>"'\/]/g, function (s) {
+			return entityMap[s];
+		});
+	}
 
 	return function (container) {
 		var $container = $(container);
@@ -17,12 +31,13 @@ define([
 				var textNodes = $container.find("*"),
 					node,
 					nodeOriginalText,
-					html;
+					html,
+					escapedEmphasisTerm = $("<div/>").text(emphasiseTerm).html();
 
 				for (var i = 0; i < textNodes.length; i++) {
 					node = textNodes[i];
 					nodeOriginalText = node.innerText;
-					html = nodeOriginalText.split(emphasiseTerm).join("<span class='emphasised'>" + _.escape(emphasiseTerm) + "</span>");
+					html = nodeOriginalText.split(emphasiseTerm).join("<span class='emphasised'>" + escapedEmphasisTerm + "</span>");
 					node.innerHTML = html;
 				}
 			}

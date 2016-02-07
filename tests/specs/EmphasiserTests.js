@@ -20,6 +20,17 @@ define([
 			expect(testRow.innerHTML).toBe(expectedEmphasisedRowHtml);
 
 		});
+
+		it("should escape the emphasis term", function () {
+			var testRow = document.createElement("tr"),
+				rowHtml = "<td>books &amp; cds</td>",
+				emphasiser = new Emphasiser(testRow);
+
+			testRow.innerHTML = rowHtml;
+			emphasiser.emphasise("books & cd");
+
+			expect(testRow.innerHTML).toBe('<td><span class="emphasised">books &amp; cd</span>s</td>');
+		});
 	});
 
 });
