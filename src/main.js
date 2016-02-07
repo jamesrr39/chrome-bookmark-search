@@ -3,16 +3,22 @@
 require.config({
 	paths: {
 		jquery: "libs/jquery/dist/jquery",
-		text: "libs/text/text"
+		text: "libs/text/text",
+		angular: "libs/angular/angular"
+	},
+	// angular does not support AMD out of the box, put it in a shim
+	shim: {
+		"angular": {
+			exports: "angular"
+		}
 	}
 });
 
 define([
 	"text!./bookmarksAppTemplate.html",
-	"Emphasiser"
-], function (bookmarksAppTemplate, Emphasiser) {
-
-	console.log("main:::::::::::::::::::::::::");
+	"Emphasiser",
+	"angular"
+], function (bookmarksAppTemplate, Emphasiser, angular) {
 
 	window.mainApp = angular.module("bookmarksApp", []);
 
@@ -22,9 +28,9 @@ define([
 				fetch: function (callback, context) {
 					var data = {
 						bookmarks: [{
-							url: "mockurl",
-							title: "mocktitle"
-						}]
+								url: "mockurl",
+								title: "mocktitle"
+							}]
 					};
 					callback.call(context || this, data);
 				}
