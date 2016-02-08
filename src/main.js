@@ -127,11 +127,12 @@ define([
 				url: url
 			});
 		};
-		$scope.filterBookmarks = function (bookmark, index, list) {
-			if (!$scope.searchTerm) {
+		$scope.filter = function (bookmark, index, list) {
+			var searchTerm = $scope.searchTerm.toUpperCase();
+			if ("" === searchTerm) {
 				return true;
 			}
-			if (bookmark.url.indexOf($scope.searchTerm) > -1 || bookmark.title.indexOf($scope.searchTerm)) {
+			if (bookmark.url.toUpperCase().indexOf(searchTerm) > -1 || bookmark.title.toUpperCase().indexOf(searchTerm) > -1) {
 				return true;
 			}
 			return false;
