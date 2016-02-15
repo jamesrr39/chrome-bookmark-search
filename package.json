@@ -16,7 +16,8 @@
 		"grunt-template-jasmine-requirejs": "~0.2.3"
 	},
 	"scripts": {
-		"install": "grunt install"
+		"install": "grunt install",
+		"test": "grunt test"
 	},
 	"dependencies": {}
 }

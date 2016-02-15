@@ -1,5 +1,7 @@
 /*jshint scripturl:true*/
 
+/* global chrome */
+
 require.config({
 	paths: {
 		jquery: "libs/jquery/dist/jquery",
@@ -117,10 +119,21 @@ define([
 	});
 
 	mainApp.controller('bookmarksController', function ($scope, MockBookmarksFactory, ChromeBookmarksFactory) {
-		var bookmarks = chrome.bookmarks ? new ChromeBookmarksFactory() : new MockBookmarksFactory();
-		bookmarks.fetch(function (bookmarks) {
-			$scope.bookmarks = bookmarks.bookmarks;
+		var bookmarkFactory = chrome.bookmarks ? new ChromeBookmarksFactory() : new MockBookmarksFactory();
+		bookmarkFactory.fetch(function (response) {
+			$scope.bookmarks = response.bookmarks;
 		}, this);
+		$scope.$watch("searchTerm", function (searchTerm) {
+			window.setTimeout(function () {
+				var emphasiser = new Emphasiser($("#bookmarksListing"));
+				emphasiser.emphasise(searchTerm);
+			}, 0);
+		});
+//			window.setTimeout(function () {
+//				var emphasiser = new Emphasiser($("#bookmarksListing"));
+//				emphasiser.emphasise(searchTerm);
+//			}, 0);
+//		});
 
 		$scope.openLinkInNewTab = function (url) {
 			chrome.tabs.create({
@@ -128,11 +141,15 @@ define([
 			});
 		};
 		$scope.filter = function (bookmark, index, list) {
-			var searchTerm = $scope.searchTerm.toUpperCase();
-			if ("" === searchTerm) {
+			var searchTerm = $scope.searchTerm,
+				upperCaseSearchTerm;
+
+			if (!searchTerm) {
 				return true;
 			}
-			if (bookmark.url.toUpperCase().indexOf(searchTerm) > -1 || bookmark.title.toUpperCase().indexOf(searchTerm) > -1) {
+			upperCaseSearchTerm = searchTerm.toUpperCase();
+
+			if (bookmark.url.toUpperCase().indexOf(upperCaseSearchTerm) > -1 || bookmark.title.toUpperCase().indexOf(upperCaseSearchTerm) > -1) {
 				return true;
 			}
 			return false;
@@ -140,6 +157,15 @@ define([
 
 	});
 
+//	mainApp.directive("afterRenderBookmarkList", function () {
+//		return function ($scope, element) {
+//			console.log($scope.searchTerm);
+////			window.setTimeout(function () {
+////				var emphasiser = new Emphasiser($(element));
+////				emphasiser.emphasise($scope.searchTerm);
+////			}, 0);
+//		};
+//	});
 
 	$("body").html(bookmarksAppTemplate);
 	angular.bootstrap(document, ["bookmarksApp"]);
