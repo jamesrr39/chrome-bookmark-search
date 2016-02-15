@@ -7,31 +7,33 @@ define([
 	describe("Emphasiser", function () {
 		it("should emphasise text in a table", function () {
 			var testRow = document.createElement("tr"),
-				rowHtml = "<td>abc</td><td>b ab</td>",
-				expectedEmphasisedRowHtml = '<td><span class="emphasised">ab</span>c</td><td>b <span class="emphasised">ab</span></td>',
-				emphasiser = new Emphasiser(testRow);
+				rowHtml = '<td class="emphasisable">dog</td><td class="emphasisable">DOGs</td>',
+				expectedEmphasisedRowHtml = '<td class="emphasisable">d<span class="emphasised">og</span></td>' +
+				'<td class="emphasisable">D<span class="emphasised">OG</span>s</td>',
+				emphasiser;
 
 			testRow.innerHTML = rowHtml;
+			emphasiser = new Emphasiser(testRow);
 
 			// check it emphasises correctly
-			emphasiser.emphasise("ab");
+			emphasiser.emphasise("og");
 			expect(testRow.innerHTML).toBe(expectedEmphasisedRowHtml);
 
-			// check it correctly resets emphasis
-			emphasiser.emphasise("ab");
+			// check it correctly resets emphasis and is case insensitive
+			emphasiser.emphasise("oG");
 			expect(testRow.innerHTML).toBe(expectedEmphasisedRowHtml);
 
 		});
 
 		it("should escape the emphasis term", function () {
 			var testRow = document.createElement("tr"),
-				rowHtml = "<td>books &amp; cds</td>",
+				rowHtml = '<td class="emphasisable">books &amp; cds</td>',
 				emphasiser = new Emphasiser(testRow);
 
 			testRow.innerHTML = rowHtml;
 			emphasiser.emphasise("books & cd");
 
-			expect(testRow.innerHTML).toBe('<td><span class="emphasised">books &amp; cd</span>s</td>');
+			expect(testRow.innerHTML).toBe('<td class="emphasisable"><span class="emphasised">books &amp; cd</span>s</td>');
 		});
 	});
 

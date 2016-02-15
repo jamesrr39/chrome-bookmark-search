@@ -78,16 +78,12 @@ define([
 					node,
 					nodeOriginalText,
 					html,
-					escapedEmphasisTerm = $("<div/>").text(emphasiseTerm).html(),
-					replacementHtml = "<span class='emphasised'>" + escapedEmphasisTerm + "</span>",
-					replacementRegex = new RegExp(emphasiseTerm, "ig");
+					escapedEmphasisTerm = $("<div/>").text(emphasiseTerm).html();
 
-				// todo case sensitivity
 				for (var i = 0; i < textNodes.length; i++) {
 					node = textNodes[i];
 					nodeOriginalText = node.innerText;
-//					html = nodeOriginalText.replace(replacementRegex, replacementHtml);
-					html = this._replaceAll(nodeOriginalText, emphasiseTerm, "<span class='emphasised'>", "</span>");
+					html = this._replaceAll(nodeOriginalText, emphasiseTerm, '<span class="emphasised">', '</span>');
 					node.innerHTML = html;
 				}
 			}
