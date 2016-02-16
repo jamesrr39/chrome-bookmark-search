@@ -129,11 +129,6 @@ define([
 				emphasiser.emphasise(searchTerm);
 			}, 0);
 		});
-//			window.setTimeout(function () {
-//				var emphasiser = new Emphasiser($("#bookmarksListing"));
-//				emphasiser.emphasise(searchTerm);
-//			}, 0);
-//		});
 
 		$scope.openLinkInNewTab = function (url) {
 			chrome.tabs.create({
@@ -166,9 +161,10 @@ define([
 ////			}, 0);
 //		};
 //	});
-
-	$("body").html(bookmarksAppTemplate);
-	angular.bootstrap(document, ["bookmarksApp"]);
+	var $bookmarksAppHtml = $(bookmarksAppTemplate);
+	$("body").append($bookmarksAppHtml);
+	angular.bootstrap($bookmarksAppHtml, ["bookmarksApp"]);
+	$bookmarksAppHtml.find(".search").focus();
 
 
 
