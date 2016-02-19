@@ -19,8 +19,9 @@ require.config({
 define([
 	"text!./bookmarksAppTemplate.html",
 	"Emphasiser",
-	"angular"
-], function (bookmarksAppTemplate, Emphasiser, angular) {
+	"angular",
+	"jquery"
+], function (bookmarksAppTemplate, Emphasiser, angular, $) {
 
 	window.mainApp = angular.module("bookmarksApp", []);
 
@@ -165,7 +166,5 @@ define([
 	$("body").append($bookmarksAppHtml);
 	angular.bootstrap($bookmarksAppHtml, ["bookmarksApp"]);
 	$bookmarksAppHtml.find(".search").focus();
-
-
 
 });

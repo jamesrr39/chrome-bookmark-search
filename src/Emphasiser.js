@@ -21,6 +21,11 @@ define([
 		});
 	}
 
+	/**
+	 *
+	 * @param {HTMLElement} container
+	 * @returns {object} instance of <code>Emphasiser</code>
+	 */
 	return function (container) {
 		var $container = $(container);
 
@@ -54,8 +59,14 @@ define([
 			 * @returns {string} modified string with replacements
 			 */
 			_replaceAll: function (haystack, needle, insertBefore, insertAfter) {
-				var indexesOfReplacement = this._indexesOf(haystack, needle),
+				var indexesOfReplacement,
 					currentIndexInString;
+
+				if (!needle) {
+					return haystack;
+				}
+
+				indexesOfReplacement = this._indexesOf(haystack, needle);
 
 				insertBefore = insertBefore || "";
 				insertAfter = insertAfter || "";
@@ -71,14 +82,19 @@ define([
 				return haystack;
 
 			},
+			/**
+			 *
+			 * @param {string} emphasiseTerm search term
+			 */
 			emphasise: function (emphasiseTerm) {
 				// split into a list of text nodes
 				// iterate through each node, and replace any instances of string with a span and the text
-				var textNodes = $container.find(".emphasisable"),
+				var textNodes,
 					node,
 					nodeOriginalText,
-					html,
-					escapedEmphasisTerm = $("<div/>").text(emphasiseTerm).html();
+					html;
+
+				textNodes = $container.find(".emphasisable");
 
 				for (var i = 0; i < textNodes.length; i++) {
 					node = textNodes[i];

@@ -23,6 +23,11 @@ define([
 			emphasiser.emphasise("oG");
 			expect(testRow.innerHTML).toBe(expectedEmphasisedRowHtml);
 
+			// check it correctly resets emphasis and is case insensitive
+			emphasiser.emphasise("");
+			expect(testRow.innerHTML).toBe(rowHtml);
+
+
 		});
 
 		it("should escape the emphasis term", function () {
@@ -34,6 +39,18 @@ define([
 			emphasiser.emphasise("books & cd");
 
 			expect(testRow.innerHTML).toBe('<td class="emphasisable"><span class="emphasised">books &amp; cd</span>s</td>');
+		});
+
+		it("should skip when there is no emphasis term", function () {
+			var testRow = document.createElement("tr"),
+				rowHtml = '<td class="emphasisable">books &amp; cds</td>',
+				emphasiser = new Emphasiser(testRow);
+
+
+			testRow.innerHTML = rowHtml;
+			emphasiser.emphasise("");
+
+			expect(testRow.innerHTML).toBe('<td class="emphasisable">books &amp; cds</td>');
 		});
 	});
 
