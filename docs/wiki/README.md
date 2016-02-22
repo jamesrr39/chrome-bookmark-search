@@ -26,4 +26,4 @@ That's why on loading the search area is focused so that you can start typing st
 
 You can also add a shortcut to open the extension, by going to `chrome://extensions`, going to the bottom of the page, clicking `Keyboard Shortcuts` and selecting a shortcut for `my-view` > `Activate the extension`.
 
-Using these shortcuts means that you won't need to use a mouse and using the application will be very fast.
+Using these shortcuts means that you won't need to use a mouse and you will be able to use the application very quickly and efficiently.
