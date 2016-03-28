@@ -1,36 +1,38 @@
 {
-	"name": "chrome-bookmarks-extension",
-	"version": "0.0.1",
-	"authors": [
-		"James Ralphs <jr.ralphs@gmail.com>"
-	],
-	"description": "chrome bookmarks extension",
-	"moduleType": [
-		"amd"
-	],
-	"keywords": [
-		"chrome",
-		"bookmarks"
-	],
-	"license": "GPL v2",
-	"private": true,
-	"ignore": [
-		"**/.*",
-		"node_modules",
-		"libs",
-		"test",
-		"tests"
-	],
-	"devDependencies": {
-		"angular": "~1.4.3",
-		"bootstrap": "~3.3.5",
-		"jquery": "~2.1.4",
-		"font-awesome": "~4.4.0"
-	},
-	"dependencies": {
-		"underscore": "~1.8.3",
-		"requirejs": "~2.1.22",
-		"text": "requirejs-text#~2.0.14",
-		"lunr": "olivernn/lunr.js#0.7.0"
-	}
+  "name": "chrome-bookmarks-extension",
+  "version": "0.0.1",
+  "authors": [
+    "James Ralphs <jr.ralphs@gmail.com>"
+  ],
+  "description": "chrome bookmarks extension",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "chrome",
+    "bookmarks"
+  ],
+  "license": "GPL v2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.4.3",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "font-awesome": "~4.4.0"
+  },
+  "dependencies": {
+    "underscore": "^1.8.3",
+    "requirejs": "~2.1.22",
+    "text": "requirejs-text#~2.0.14",
+    "lunr": "olivernn/lunr.js#0.7.0",
+    "handlebars": "^4.0.5",
+    "mustache.js": "mustache#^2.2.1"
+  }
 }
