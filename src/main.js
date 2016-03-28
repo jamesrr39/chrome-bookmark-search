@@ -131,8 +131,14 @@ define([
 			$("#bookmarksListing").html(html);
 
 			window.setTimeout(function () {
-				var emphasiser = new Emphasiser($("#bookmarksListing"));
-				emphasiser.emphasise(searchTerm);
+				var emphasiser = new Emphasiser($("#bookmarksListing")),
+					stemmedWords = searchTerm.split(" ").map(function (searchWord) {
+					return lunr.stemmer(searchWord);
+				}).filter(function (searchWord) {
+					return true;
+				});
+
+				emphasiser.emphasise(stemmedWords);
 			}, 0);
 
 		});
@@ -142,19 +148,6 @@ define([
 				url: url
 			});
 		});
-//		$scope.filter = function (bookmark, index, list) {
-//		var searchTerm = $scope.searchTerm,
-//			upperCaseSearchTerm;
-//			if (!searchTerm) {
-//		return true;
-//		}
-//		upperCaseSearchTerm = searchTerm.toUpperCase();
-//			if (bookmark.url.toUpperCase().indexOf(upperCaseSearchTerm) > - 1 || bookmark.title.toUpperCase().indexOf(upperCaseSearchTerm) > - 1) {
-//		return true;
-//		}
-//		return false;
-//		};
-//	});
 
 		$("#searchTermInput").focus();
 	});

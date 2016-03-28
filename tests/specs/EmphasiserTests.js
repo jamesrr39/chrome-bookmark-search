@@ -30,6 +30,17 @@ define([
 
 		});
 
+		it("should emphasise an array", function () {
+			var element = document.createElement("div"),
+				emphasiser = new Emphasiser(element);
+
+			element.innerHTML = "<span class='emphasisable'>books cds dvds</span>";
+			emphasiser.emphasise(["book", "vds"]);
+
+			expect(element.innerHTML).toBe('<span class="emphasisable"><span class="emphasised">book</span>s cds d<span class="emphasised">vds</span></span>');
+
+		});
+
 		it("should escape the emphasis term", function () {
 			var testRow = document.createElement("tr"),
 				rowHtml = '<td class="emphasisable">books &amp; cds</td>',

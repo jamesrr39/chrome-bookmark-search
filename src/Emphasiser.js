@@ -69,22 +69,26 @@ define([
 			},
 			/**
 			 *
-			 * @param {string} emphasiseTerm search term
+			 * @param {string|string[]} emphasiseTerms search term
 			 */
-			emphasise: function (emphasiseTerm) {
+			emphasise: function (emphasiseTerms) {
+				if ("object" !== typeof emphasiseTerms) {
+					emphasiseTerms = [emphasiseTerms];
+				}
 				// split into a list of text nodes
 				// iterate through each node, and replace any instances of string with a span and the text
 				var textNodes,
 					node,
-					nodeOriginalText,
 					html;
 
 				textNodes = $container.find(".emphasisable");
 
 				for (var i = 0; i < textNodes.length; i++) {
 					node = textNodes[i];
-					nodeOriginalText = node.innerText;
-					html = this._replaceAll(nodeOriginalText, emphasiseTerm, '<span class="emphasised">', '</span>');
+					html = node.innerText;
+					for (var j = 0; j < emphasiseTerms.length; j++) {
+						html = this._replaceAll(html, emphasiseTerms[j], '<span class="emphasised">', '</span>');
+					}
 					node.innerHTML = html;
 				}
 			}
