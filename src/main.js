@@ -33,7 +33,7 @@ define([
 		this.ref("url");
 	});
 
-	window.mainApp = angular.module("bookmarksApp", []);
+	var mainApp = angular.module("bookmarksApp", []);
 
 	mainApp.factory("MockBookmarksFactory", function () {
 		return function () {
