@@ -6,7 +6,8 @@ require.config({
 	paths: {
 		jquery: "libs/jquery/dist/jquery",
 		text: "libs/text/text",
-		angular: "libs/angular/angular"
+		angular: "libs/angular/angular",
+		lunr: "libs/lunr/lunr"
 	},
 	// angular does not support AMD out of the box, put it in a shim
 	shim: {
@@ -20,8 +21,17 @@ define([
 	"text!./bookmarksAppTemplate.html",
 	"Emphasiser",
 	"angular",
-	"jquery"
-], function (bookmarksAppTemplate, Emphasiser, angular, $) {
+	"jquery",
+	"lunr"
+], function (bookmarksAppTemplate, Emphasiser, angular, $, lunr) {
+
+	var searchIndex = lunr(function () {
+		this.field("url", {
+			boost: 10
+		});
+		this.field("title");
+		this.ref("url");
+	});
 
 	window.mainApp = angular.module("bookmarksApp", []);
 
@@ -112,7 +122,12 @@ define([
 			return {
 				fetch: function (callback, context) {
 					chrome.bookmarks.getTree(function (bookmarkTree) {
-						callback.call(context || this, flatten(bookmarkTree));
+						var bookmarks = flatten(bookmarkTree);
+
+						angular.forEach(bookmarks, function (bookmark) {
+							searchIndex.add(bookmark);
+						});
+						callback.call(context || this, bookmarks);
 					});
 				}
 			};
@@ -121,9 +136,11 @@ define([
 
 	mainApp.controller('bookmarksController', function ($scope, MockBookmarksFactory, ChromeBookmarksFactory) {
 		var bookmarkFactory = chrome.bookmarks ? new ChromeBookmarksFactory() : new MockBookmarksFactory();
+
 		bookmarkFactory.fetch(function (response) {
 			$scope.bookmarks = response.bookmarks;
 		}, this);
+
 		$scope.$watch("searchTerm", function (searchTerm) {
 			window.setTimeout(function () {
 				var emphasiser = new Emphasiser($("#bookmarksListing"));
@@ -136,6 +153,7 @@ define([
 				url: url
 			});
 		};
+
 		$scope.filter = function (bookmark, index, list) {
 			var searchTerm = $scope.searchTerm,
 				upperCaseSearchTerm;
@@ -153,15 +171,6 @@ define([
 
 	});
 
-//	mainApp.directive("afterRenderBookmarkList", function () {
-//		return function ($scope, element) {
-//			console.log($scope.searchTerm);
-////			window.setTimeout(function () {
-////				var emphasiser = new Emphasiser($(element));
-////				emphasiser.emphasise($scope.searchTerm);
-////			}, 0);
-//		};
-//	});
 	var $bookmarksAppHtml = $(bookmarksAppTemplate);
 	$("body").append($bookmarksAppHtml);
 	angular.bootstrap($bookmarksAppHtml, ["bookmarksApp"]);

@@ -18,6 +18,5 @@
 	"scripts": {
 		"install": "grunt install",
 		"test": "grunt test"
-	},
-	"dependencies": {}
+	}
 }
