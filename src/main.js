@@ -6,7 +6,6 @@ require.config({
 	paths: {
 		jquery: "libs/jquery/dist/jquery",
 		text: "libs/text/text",
-		angular: "libs/angular/angular",
 		lunr: "libs/lunr/lunr",
 		mustache: "libs/mustache.js/mustache"
 	}
@@ -131,11 +130,10 @@ define([
 
 			$("#bookmarksListing").html(html);
 
-//			window.setTimeout(function () {
-//			var emphasiser = new Emphasiser($("#bookmarksListing"));
-//				emphasiser.emphasise(searchTerm);
-//			}, 0);
-//		});
+			window.setTimeout(function () {
+				var emphasiser = new Emphasiser($("#bookmarksListing"));
+				emphasiser.emphasise(searchTerm);
+			}, 0);
 
 		});
 		$("#bookmarksListing .openLink").on("click", function (event) {

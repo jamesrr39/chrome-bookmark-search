@@ -21,14 +21,10 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "angular": "~1.4.3",
+  "dependencies": {
     "bootstrap": "~3.3.5",
     "jquery": "~2.1.4",
     "font-awesome": "~4.4.0"
-  },
-  "dependencies": {
-    "underscore": "^1.8.3",
     "requirejs": "~2.1.22",
     "text": "requirejs-text#~2.0.14",
     "lunr": "olivernn/lunr.js#0.7.0",
