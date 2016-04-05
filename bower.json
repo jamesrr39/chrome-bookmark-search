@@ -28,7 +28,6 @@
 		"requirejs": "~2.1.22",
 		"text": "requirejs-text#~2.0.14",
 		"lunr": "olivernn/lunr.js#0.7.0",
-		"handlebars": "^4.0.5",
 		"mustache.js": "mustache#^2.2.1"
 	}
 }
