@@ -72,23 +72,63 @@ define([
 			 * @param {string|string[]} emphasiseTerms search term
 			 */
 			emphasise: function (emphasiseTerms) {
-				if ("object" !== typeof emphasiseTerms) {
-					emphasiseTerms = [emphasiseTerms];
-				}
-				// split into a list of text nodes
-				// iterate through each node, and replace any instances of string with a span and the text
 				var textNodes,
 					node,
-					html;
+					html,
+					indexesOfTerm,
+					indexMapper = function (indexOfTerm) {
+						return {
+							start: indexOfTerm,
+							end: indexOfTerm + term.length
+						};
+					};
 
+				if ("object" !== typeof emphasiseTerms) {
+					// if it's a string/number
+					emphasiseTerms = [emphasiseTerms + ""];
+				}
+
+				// remove previously added emphasised nodes
+				$container.remove(".emphasised");
+
+				// split into a list of text nodes
 				textNodes = $container.find(".emphasisable");
 
+				// iterate through each node, and replace any instances of string with a span and the text
 				for (var i = 0; i < textNodes.length; i++) {
+					indexesOfTerm = [];
 					node = textNodes[i];
 					html = node.innerText;
 					for (var j = 0; j < emphasiseTerms.length; j++) {
-						html = this._replaceAll(html, emphasiseTerms[j], '<span class="emphasised">', '</span>');
+						var term = emphasiseTerms[j];
+						// escape empty string
+						if ("" === term) {
+							continue;
+						}
+						indexesOfTerm = indexesOfTerm
+							.concat(this._indexesOf(html, term)
+								.map(indexMapper));
 					}
+
+					// sort by end desc
+					indexesOfTerm.sort(function (a, b) {
+						return  b.end - a.end;
+					});
+
+					// remove overlaps
+					for (var k = 0; k < indexesOfTerm.length; k++) {
+						while (indexesOfTerm[k + 1] && indexesOfTerm[k].start < indexesOfTerm[k + 1].end) {
+							if (indexesOfTerm[k].start > indexesOfTerm[k + 1].start) {
+								indexesOfTerm[k].start = indexesOfTerm[k + 1].start;
+							}
+							indexesOfTerm.splice(k + 1, 1);
+						}
+					}
+					for (var l = 0; l < indexesOfTerm.length; l++) {
+						html = html.substr(0, indexesOfTerm[l].end) + '</span>' + html.substr(indexesOfTerm[l].end);
+						html = html.substr(0, indexesOfTerm[l].start) + '<span class="emphasised">' + html.substr(indexesOfTerm[l].start);
+					}
+
 					node.innerHTML = html;
 				}
 			}

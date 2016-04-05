@@ -34,10 +34,10 @@ define([
 			var element = document.createElement("div"),
 				emphasiser = new Emphasiser(element);
 
-			element.innerHTML = "<span class='emphasisable'>books cds dvds</span>";
-			emphasiser.emphasise(["book", "vds"]);
+			element.innerHTML = "<span class='emphasisable'>books cds php</span>";
+			emphasiser.emphasise(["book", "h"]);
 
-			expect(element.innerHTML).toBe('<span class="emphasisable"><span class="emphasised">book</span>s cds d<span class="emphasised">vds</span></span>');
+			expect(element.innerHTML).toBe('<span class="emphasisable"><span class="emphasised">book</span>s cds p<span class="emphasised">h</span>p</span>');
 
 		});
 

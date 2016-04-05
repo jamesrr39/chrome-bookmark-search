@@ -132,10 +132,10 @@ define([
 
 			window.setTimeout(function () {
 				var emphasiser = new Emphasiser($("#bookmarksListing")),
-					stemmedWords = searchTerm.split(" ").map(function (searchWord) {
+					stemmedWords = lunr.tokenizer(searchTerm).map(function (searchWord) {
 					return lunr.stemmer(searchWord);
 				}).filter(function (searchWord) {
-					return true;
+					return "" !== searchWord;
 				});
 
 				emphasiser.emphasise(stemmedWords);
