@@ -22,7 +22,9 @@ define([
 		this.field("url", {
 			boost: 10
 		});
-		this.field("title");
+		this.field("title", {
+			boost: 5
+		});
 		this.ref("url");
 	});
 	/**
@@ -120,11 +122,16 @@ define([
 			var searchTerm = this.value,
 				results = searchIndex.search(searchTerm),
 				html = results.map(function (result) {
-					var bookmark = bookmarks.asMap()[result.ref];
+					var bookmark = bookmarks.asMap()[result.ref],
+						indexOfProtocolEnd = bookmark.url.indexOf("://"),
+						siteUrl = (indexOfProtocolEnd === -1) ? bookmark.url.substring(0, bookmark.url.indexOf("/")) : bookmark.url.substring(0, bookmark.url.indexOf("/", indexOfProtocolEnd + 3));
+
+
 					return Mustache.render(bookmarkTemplate, {
 						url: bookmark.url,
 						title: bookmark.title,
-						score: result.score
+						score: result.score,
+						faviconUrl: "chrome://favicon/" + siteUrl
 					});
 				}).join("");
 
@@ -133,16 +140,16 @@ define([
 			window.setTimeout(function () {
 				var emphasiser = new Emphasiser($("#bookmarksListing")),
 					stemmedWords = lunr.tokenizer(searchTerm).map(function (searchWord) {
-					return lunr.stemmer(searchWord);
-				}).filter(function (searchWord) {
-					return "" !== searchWord;
-				});
+						return lunr.stemmer(searchWord);
+					}).filter(function (searchWord) {
+						return "" !== searchWord;
+					});
 
 				emphasiser.emphasise(stemmedWords);
 			}, 0);
 
 		});
-		$("#bookmarksListing .openLink").on("click", function (event) {
+		$("#bookmarksListing").on("click", ".openLink", function (event) {
 			var url = $(this).attr("href");
 			chrome.tabs.create({
 				url: url
@@ -152,4 +159,3 @@ define([
 		$("#searchTermInput").focus();
 	});
 });
-

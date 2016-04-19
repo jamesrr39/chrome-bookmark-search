@@ -112,7 +112,7 @@ define([
 
 					// sort by end desc
 					indexesOfTerm.sort(function (a, b) {
-						return  b.end - a.end;
+						return b.end - a.end;
 					});
 
 					// remove overlaps
