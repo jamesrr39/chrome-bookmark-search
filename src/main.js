@@ -99,7 +99,8 @@ define([
 			fetch: function (callback, context) {
 				chrome.bookmarks.getTree(function (bookmarkTree) {
 					var bookmarksTree = flatten(bookmarkTree);
-					bookmarkList = bookmarkTree.bookmarks;
+
+					bookmarkList = bookmarksTree.bookmarks;
 
 					bookmarksTree.bookmarks.forEach(function (bookmark) {
 						bookmarkMap[bookmark.url] = bookmark;
@@ -116,34 +117,68 @@ define([
 			}
 		};
 	};
+
+	function buildBookmarkHtml(bookmark, score, rowClass) {
+		var indexOfProtocolEnd = bookmark.url.indexOf("://"),
+			siteUrl = (indexOfProtocolEnd === -1) ? bookmark.url.substring(0, bookmark.url.indexOf("/")) : bookmark.url.substring(0, bookmark.url.indexOf("/", indexOfProtocolEnd + 3));
+
+		return Mustache.render(bookmarkTemplate, {
+			url: bookmark.url,
+			title: bookmark.title,
+			score: score,
+			faviconUrl: "chrome://favicon/" + siteUrl,
+			rowClass: rowClass
+		});
+	}
+
 	var bookmarks = new Bookmarks();
 	bookmarks.fetch(function () {
 		$("#searchTermInput").keyup(function () {
 			var searchTerm = this.value,
 				results = searchIndex.search(searchTerm),
+				searchResultsAsMap = {},
 				html = results.map(function (result) {
-					var bookmark = bookmarks.asMap()[result.ref],
-						indexOfProtocolEnd = bookmark.url.indexOf("://"),
-						siteUrl = (indexOfProtocolEnd === -1) ? bookmark.url.substring(0, bookmark.url.indexOf("/")) : bookmark.url.substring(0, bookmark.url.indexOf("/", indexOfProtocolEnd + 3));
+					var bookmark = bookmarks.asMap()[result.ref];
 
+					searchResultsAsMap[bookmark.url] = bookmark;
 
-					return Mustache.render(bookmarkTemplate, {
-						url: bookmark.url,
-						title: bookmark.title,
-						score: result.score,
-						faviconUrl: "chrome://favicon/" + siteUrl
-					});
+					return buildBookmarkHtml(bookmark, result.score, "searchResult");
 				}).join("");
 
 			$("#bookmarksListing").html(html);
 
 			window.setTimeout(function () {
+				var filterTerms = lunr.tokenizer(searchTerm),
+					filterResults = bookmarks.asList().filter(function (bookmark) {
+					for (var i = 0; i < filterTerms.length; i++) {
+						if (searchResultsAsMap[bookmark.url]) {
+							return false;
+						}
+
+						if (bookmark.url.indexOf(filterTerms[i]) !== -1) {
+							return true;
+						}
+						if (bookmark.title.indexOf(filterTerms[i]) !== -1) {
+							return true;
+						}
+					}
+					return false;
+				});
+
+				var html = filterResults.map(function (bookmark) {
+					return buildBookmarkHtml(bookmark, 0, "filterResult");
+				}).join("");
+
+				$("#bookmarksListing").append(html);
+			}, 0);
+
+			window.setTimeout(function () {
 				var emphasiser = new Emphasiser($("#bookmarksListing")),
 					stemmedWords = lunr.tokenizer(searchTerm).map(function (searchWord) {
-						return lunr.stemmer(searchWord);
-					}).filter(function (searchWord) {
-						return "" !== searchWord;
-					});
+					return lunr.stemmer(searchWord);
+				}).filter(function (searchWord) {
+					return "" !== searchWord;
+				});
 
 				emphasiser.emphasise(stemmedWords);
 			}, 0);
