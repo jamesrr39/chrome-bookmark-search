@@ -148,24 +148,27 @@ define([
 			$("#bookmarksListing").html(html);
 
 			window.setTimeout(function () {
-				var filterTerms = lunr.tokenizer(searchTerm),
+				var filterTerms = lunr.tokenizer(searchTerm).map(function (filterTerm) {
+					return filterTerm.toUpperCase();
+				}),
+					html,
 					filterResults = bookmarks.asList().filter(function (bookmark) {
 					for (var i = 0; i < filterTerms.length; i++) {
 						if (searchResultsAsMap[bookmark.url]) {
 							return false;
 						}
 
-						if (bookmark.url.indexOf(filterTerms[i]) !== -1) {
+						if (bookmark.url.toUpperCase().indexOf(filterTerms[i]) !== -1) {
 							return true;
 						}
-						if (bookmark.title.indexOf(filterTerms[i]) !== -1) {
+						if (bookmark.title.toUpperCase().indexOf(filterTerms[i]) !== -1) {
 							return true;
 						}
 					}
 					return false;
 				});
 
-				var html = filterResults.map(function (bookmark) {
+				html = filterResults.map(function (bookmark) {
 					return buildBookmarkHtml(bookmark, 0, "filterResult");
 				}).join("");
 
