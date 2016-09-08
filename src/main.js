@@ -36,22 +36,29 @@ define([
 	 * @returns {array} list of bookmarks with a new <code>folders</code> property
 	 */
 	function mergeFoldersIntoBookmarks(bookmarks, folders) {
+		// map[id]Folder
+		var foldersMap = {};
+		folders.forEach(function (folder) {
+			foldersMap[folder.id] = folder;
+		});
+
 		return bookmarks.map(function (bookmark) {
 			var parentFolder,
 				parentFolders = [];
 			(function setFolders(node) {
 				if (node.hasOwnProperty("parentId")) {
 					// todo - performance, does this need to be moved to a collection
-					parentFolder = _.find(folders, function (folder) {
-						return folder.id === node.parentId;
-					});
+//					parentFolder = _.find(folders, function (folder) {
+//						return folder.id === node.parentId;
+//					});
+					parentFolder = foldersMap[node.parentId];
 					if (parentFolder.title !== "" && parentFolder.title !== "Bookmarks bar") {
 						parentFolders.push(parentFolder.title);
 					}
 					setFolders(parentFolder);
 				}
 			})(bookmark);
-			return _.extend(bookmark, {
+			return $.extend({}, bookmark, {
 				folders: parentFolders
 			});
 		});
@@ -97,12 +104,13 @@ define([
 
 		return {
 			fetch: function (callback, context) {
-				chrome.bookmarks.getTree(function (bookmarkTree) {
-					var bookmarksTree = flatten(bookmarkTree);
+				chrome.bookmarks.getTree(function (chromeBookmarkTree) {
+					var bookmarksTree = flatten(chromeBookmarkTree),
+						bookmarks = mergeFoldersIntoBookmarks(bookmarksTree.bookmarks, bookmarksTree.folders);
 
-					bookmarkList = bookmarksTree.bookmarks;
+					bookmarkList = bookmarks;
 
-					bookmarksTree.bookmarks.forEach(function (bookmark) {
+					bookmarks.forEach(function (bookmark) {
 						bookmarkMap[bookmark.url] = bookmark;
 						searchIndex.add(bookmark);
 					});
@@ -127,7 +135,8 @@ define([
 			title: bookmark.title,
 			score: score,
 			faviconUrl: "chrome://favicon/" + siteUrl,
-			rowClass: rowClass
+			rowClass: rowClass,
+			folders: bookmark.folders
 		});
 	}
 
