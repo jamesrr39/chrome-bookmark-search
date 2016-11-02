@@ -1,4 +1,4 @@
-<li class="padded-top {{rowClass}}">
+<li class="padded-top {{rowClass}} result">
 	<img src="{{faviconUrl}}" alt="{{url}}" />
 	<a class="openLink" href="{{ url }}">
 		<span class="emphasisable">{{ title }}</span>
@@ -7,6 +7,10 @@
 		<i class="fa fa-fw fa-bookmark"></i>
 	</span>
 	<br /><span class="emphasisable">{{ url }}</span>
-	<br /><span class="score">Score: {{ score }}</span>
 	<br/><span class="folders">{{#folders}} <span class="folder"> {{.}} </span> {{/folders}}</span>
+	<br/><a href="#" class="more"><span><i class="fa fa-fw fa-info-circle">&nbsp;More</i></span></a>
+	<div class="more-info hidden">
+		<span class="score">Score from lunr search: {{ score }}</span>
+		<br/><span class="resultType">Type of result: {{resultTypeName}}</span>
+	</div>
 </li>
