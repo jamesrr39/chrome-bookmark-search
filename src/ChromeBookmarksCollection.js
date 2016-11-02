@@ -4,6 +4,8 @@ define([
 	"jquery"
 ], function ($) {
 
+	var JAVASCRIPT_URL_PREFIX = "javascript:"; // jshint ignore:line
+
 	/**
 	 * Takes a list of bookmarks and folders and returns a modified list of the bookmarks.
 	 * Produces an additional property, <code>folders</code>, a list of names of folders the bookmark appears in.
@@ -61,7 +63,7 @@ define([
 				return flatten(bookmarkSubTree.children);
 			} else {
 				// don't accept bookmarklets
-				if (bookmarkSubTree.url.indexOf("javascript:") !== 0) {
+				if (bookmarkSubTree.url.indexOf(JAVASCRIPT_URL_PREFIX) !== 0) {
 					bookmarks.push(bookmarkSubTree);
 				}
 			}
