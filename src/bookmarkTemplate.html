@@ -8,9 +8,10 @@
 	</span>
 	<br /><span class="emphasisable">{{ url }}</span>
 	<br/><span class="folders">{{#folders}} <span class="folder"> {{.}} </span> {{/folders}}</span>
-	<br/><a href="#" class="more"><span><i class="fa fa-fw fa-info-circle">&nbsp;More</i></span></a>
+	<br/><a href="#" class="more"><span><i class="glyphicon glyphicon-info-sign">&nbsp;More</i></span></a>
 	<div class="more-info hidden">
 		<span class="score">Score from lunr search: {{ score }}</span>
 		<br/><span class="resultType">Type of result: {{resultTypeName}}</span>
+                <br/><span>Date added: {{ dateAdded }}</span>
 	</div>
 </li>

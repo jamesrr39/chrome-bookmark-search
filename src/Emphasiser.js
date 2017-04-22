@@ -24,7 +24,7 @@ define([
 			 */
 			_indexesOf: function (haystack, needle) {
 				var indexes = [],
-					currentIndex = -1;
+						currentIndex = -1;
 
 				while (true) {
 					currentIndex = haystack.toUpperCase().indexOf(needle.toUpperCase(), currentIndex + 1);
@@ -45,7 +45,7 @@ define([
 			 */
 			_replaceAll: function (haystack, needle, insertBefore, insertAfter) {
 				var indexesOfReplacement,
-					currentIndexInString;
+						currentIndexInString;
 
 				if (!needle) {
 					return haystack;
@@ -59,10 +59,10 @@ define([
 				for (var positionInIndexes = indexesOfReplacement.length - 1; positionInIndexes >= 0; positionInIndexes--) {
 					currentIndexInString = indexesOfReplacement[positionInIndexes];
 					haystack = haystack.slice(0, currentIndexInString) +
-						insertBefore +
-						haystack.slice(currentIndexInString, currentIndexInString + needle.length) +
-						insertAfter +
-						haystack.slice(currentIndexInString + needle.length);
+							insertBefore +
+							haystack.slice(currentIndexInString, currentIndexInString + needle.length) +
+							insertAfter +
+							haystack.slice(currentIndexInString + needle.length);
 				}
 				return haystack;
 
@@ -73,15 +73,15 @@ define([
 			 */
 			emphasise: function (emphasiseTerms) {
 				var textNodes,
-					node,
-					html,
-					indexesOfTerm,
-					indexMapper = function (indexOfTerm) {
-						return {
-							start: indexOfTerm,
-							end: indexOfTerm + term.length
+						node,
+						html,
+						indexesOfTerm,
+						indexMapper = function (indexOfTerm) {
+							return {
+								start: indexOfTerm,
+								end: indexOfTerm + term.length
+							};
 						};
-					};
 
 				if ("object" !== typeof emphasiseTerms) {
 					// if it's a string/number
@@ -106,8 +106,8 @@ define([
 							continue;
 						}
 						indexesOfTerm = indexesOfTerm
-							.concat(this._indexesOf(html, term)
-								.map(indexMapper));
+								.concat(this._indexesOf(html, term)
+										.map(indexMapper));
 					}
 
 					// sort by end desc
@@ -133,7 +133,5 @@ define([
 				}
 			}
 		};
-
 	};
-
 });

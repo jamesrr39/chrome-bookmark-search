@@ -1,5 +1,4 @@
 define([], function () {
-
 	return {
 		debounceLater: function (callback, waitMilliseconds) {
 			var timeout;
@@ -15,5 +14,4 @@ define([], function () {
 			};
 		}
 	};
-
 });

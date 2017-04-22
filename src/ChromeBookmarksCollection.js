@@ -1,9 +1,7 @@
 /* global chrome */
-
 define([
 	"jquery"
 ], function ($) {
-
 	var JAVASCRIPT_URL_PREFIX = "javascript:"; // jshint ignore:line
 
 	/**
@@ -23,7 +21,7 @@ define([
 
 		return bookmarks.map(function (bookmark) {
 			var parentFolder,
-				parentFolders = [];
+					parentFolders = [];
 			(function setFolders(node) {
 				if (node.hasOwnProperty("parentId")) {
 					// todo - performance, does this need to be moved to a collection
@@ -52,7 +50,7 @@ define([
 	 */
 	function flatten(bookmarkSubTree) {
 		var bookmarks = [],
-			folders = [];
+				folders = [];
 		(function flatten(bookmarkSubTree) {
 			if (Array.isArray(bookmarkSubTree)) {
 				return bookmarkSubTree.map(function (bookmarkSubTreeChild) {
@@ -81,13 +79,13 @@ define([
 	 */
 	var BookmarksCollection = function (searchIndex) {
 		var bookmarkMap = {},
-			bookmarkList;
+				bookmarkList;
 
 		return {
 			fetch: function (callback, context) {
 				chrome.bookmarks.getTree(function (chromeBookmarkTree) {
 					var bookmarksTree = flatten(chromeBookmarkTree),
-						bookmarks = mergeFoldersIntoBookmarks(bookmarksTree.bookmarks, bookmarksTree.folders);
+							bookmarks = mergeFoldersIntoBookmarks(bookmarksTree.bookmarks, bookmarksTree.folders);
 
 					bookmarkList = bookmarks;
 

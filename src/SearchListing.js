@@ -18,7 +18,18 @@ define([
 
 	function buildBookmarkHtml(bookmark, score, rowType) {
 		var indexOfProtocolEnd = bookmark.url.indexOf("://"),
-			siteUrl = (indexOfProtocolEnd === -1) ? bookmark.url.substring(0, bookmark.url.indexOf("/")) : bookmark.url.substring(0, bookmark.url.indexOf("/", indexOfProtocolEnd + 3));
+				siteUrl = (indexOfProtocolEnd === -1) ? bookmark.url.substring(0, bookmark.url.indexOf("/")) : bookmark.url.substring(0, bookmark.url.indexOf("/", indexOfProtocolEnd + 3));
+
+		var dateAdded = new Date(bookmark.dateAdded),
+				monthStr = (dateAdded.getMonth() + 1) + "",
+				dateStr = dateAdded.getDate() + "";
+
+		while (monthStr.length < 2) {
+			monthStr = "0" + monthStr;
+		}
+		while (dateStr.length < 2) {
+			dateStr = "0" + dateStr;
+		}
 
 		return Mustache.render(bookmarkTemplate, {
 			url: bookmark.url,
@@ -27,7 +38,8 @@ define([
 			faviconUrl: "chrome://favicon/" + siteUrl,
 			rowClass: rowType.cssClass,
 			folders: bookmark.folders,
-			resultTypeName: rowType.name
+			resultTypeName: rowType.name,
+			dateAdded: dateAdded.getFullYear() + "-" + monthStr + "-" + dateStr
 		});
 	}
 
@@ -35,7 +47,7 @@ define([
 		buildHtmlFromSearch: function (searchTerm, searchIndex, bookmarks) {
 
 			var searchResults = searchIndex.search(searchTerm),
-				searchResultsAsMap = {};
+					searchResultsAsMap = {};
 
 			searchResults.forEach(function (result) {
 				var bookmark = bookmarks.asMap()[result.ref];
@@ -80,7 +92,7 @@ define([
 
 			// emphasise
 			var emphasiser = new Emphasiser($("#bookmarksListing")),
-				stemmedWords = lunr.tokenizer(searchTerm).map(function (searchWord) {
+					stemmedWords = lunr.tokenizer(searchTerm).map(function (searchWord) {
 				return lunr.stemmer(searchWord);
 			}).filter(function (searchWord) {
 				return "" !== searchWord;
