@@ -18,4 +18,4 @@ The extension should then appear in Chrome with your other extensions.
 
 ## More information
 
-[wiki](./docs/wiki.md)
+[wiki](./docs/wiki/wiki.md)
