@@ -1,6 +1,6 @@
 {
-	"name": "my-view",
-	"description": "my view",
+	"name": "chrome bookmark search extension",
+	"description": "bookmark search extension for google chrome",
 	"version": "0.0.1",
 	"private": true,
 	"author": {

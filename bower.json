@@ -1,8 +1,8 @@
 {
-  "name": "chrome-bookmarks-extension",
+  "name": "chrome-bookmark-search",
   "version": "0.0.1",
   "authors": [
-    "James Ralphs <jr.ralphs@gmail.com>"
+    "James Ralphs <jr39.dev@gmail.com>"
   ],
   "description": "chrome bookmarks extension",
   "moduleType": [
