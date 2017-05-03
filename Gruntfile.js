@@ -3,8 +3,11 @@ module.exports = function (grunt) {
 	var requireConfig = {
 		baseUrl: "src",
 		paths: {
-			jquery: "libs/jquery/dist/jquery",
-			underscore: "libs/underscore/underscore"
+       		        jquery: "libs/jquery/dist/jquery",
+	                text: "libs/text/text",
+        	        lunr: "libs/lunr/lunr",
+	                mustache: "libs/mustache.js/mustache",
+	                underscore: "libs/underscore/underscore"
 		}
 	};
 
@@ -52,8 +55,8 @@ module.exports = function (grunt) {
 				options: {
 					baseUrl: requireConfig.baseUrl,
 					paths: requireConfig.paths,
-					out: "dist/optimized.js",
-					name: "my-view"
+					out: "dist/main.js",
+					name: "main"
 				}
 			}
 		},
