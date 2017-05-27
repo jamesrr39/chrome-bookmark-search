@@ -6,8 +6,7 @@ module.exports = function (grunt) {
        		        jquery: "libs/jquery/dist/jquery",
 	                text: "libs/text/text",
         	        lunr: "libs/lunr/lunr",
-	                mustache: "libs/mustache.js/mustache",
-	                underscore: "libs/underscore/underscore"
+	                mustache: "libs/mustache.js/mustache"
 		}
 	};
 
