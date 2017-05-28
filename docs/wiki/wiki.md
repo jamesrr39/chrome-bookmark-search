@@ -1,4 +1,4 @@
-# Wiki
+# Wiki & Tips
 
 On this page, you can find information about parts of the tool and tips.
 
