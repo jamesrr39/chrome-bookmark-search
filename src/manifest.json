@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
 	"name": "Bookmark Search",
-	"description": "Intelligently search through your chrome bookmarks. https://github.com/jamesrr39/chrome-bookmark-search",
-	"version": "1.0.0",
+	"description": "Intelligently search through your chrome bookmarks",
+	"version": "1.0.1",
 	"minimum_chrome_version": "38",
 	"browser_action": {
 		"default_icon": {
