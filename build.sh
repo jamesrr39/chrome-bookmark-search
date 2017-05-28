@@ -24,3 +24,5 @@ cp src/libs/requirejs/require.js dist/libs/requirejs/
 
 # bundle
 grunt requirejs:compile
+
+zip -r dist/bundle.zip dist/*
