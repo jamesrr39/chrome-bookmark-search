@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Bookmark Search",
 	"description": "Intelligently search through your chrome bookmarks",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"minimum_chrome_version": "38",
 	"browser_action": {
 		"default_icon": {
@@ -15,7 +15,6 @@
 		"default_popup": "index.html"
 	},
 	"permissions": [
-		"tabs",
 		"bookmarks",
 		"chrome://favicon/"
 	],

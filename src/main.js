@@ -48,12 +48,6 @@ define([
 
 			debouncedSearch(searchTerm, searchIndex, bookmarks);
 		});
-		$("#bookmarksListing").on("click", ".openLink", function (event) {
-			var url = $(this).attr("href");
-			chrome.tabs.create({
-				url: url
-			});
-		});
 
 		$("#searchTermInput").focus();
 	});
