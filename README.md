@@ -2,6 +2,8 @@
 
 Bookmark Search is a productivity tool. It's designed to help you manage your bookmarks more efficiently in Chrome.
 
+It's available on [the Chrome Webstore!](https://chrome.google.com/webstore/detail/bookmark-search/fcjphnojgeikgjajhlihdjnljnbpfhmi)
+
 It uses both standard filtering and the [lunr](https://lunrjs.com/) project to power searching your bookmarks.
 
 ## Licence
