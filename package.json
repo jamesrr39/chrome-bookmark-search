@@ -1,22 +1,28 @@
 {
-	"name": "chrome bookmark search extension",
+	"name": "chrome-bookmark-search-extension",
 	"description": "bookmark search extension for google chrome",
 	"version": "0.0.1",
 	"private": true,
-	"author": {
-		"name": "jr39.dev@gmail.com"
-	},
+	"author": "jr39.dev@gmail.com",
+	"main": "index.js",
+	"repository": "https://github.com/jamesrr39/chrome-bookmark-search.git",
+	"license": "GPL-2.0-only",
+	"packageManager": "yarn@4.7.0",
 	"devDependencies": {
-		"grunt-contrib-jshint": "^0.11.1",
-		"grunt-jsbeautifier": "^0.2.10",
-		"bower": "~1.4.1",
-		"grunt-bower-install-task": "0.0.4",
-		"grunt-contrib-requirejs": "^0.4.4",
-		"grunt-contrib-jasmine": "~0.8.2",
-		"grunt-template-jasmine-requirejs": "~0.2.3"
+		"@types/chrome": "^0.0.308",
+		"@types/lunr": "^2",
+		"typescript": "^5.8.2"
 	},
-	"scripts": {
-		"install": "grunt install",
-		"test": "grunt test"
+	"dependenciesMeta": {
+		"@types/chrome@0.0.308": {
+			"unplugged": true
+		},
+		"preact@10.26.4": {
+			"unplugged": true
+		}
+	},
+	"dependencies": {
+		"lunr": "^2.3.9",
+		"preact": "^10.26.4"
 	}
 }

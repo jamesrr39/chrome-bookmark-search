@@ -1,9 +1,8 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "Bookmark Search",
 	"description": "Intelligently search through your chrome bookmarks",
-	"version": "1.0.2",
-	"minimum_chrome_version": "38",
+	"version": "1.0.3",
 	"browser_action": {
 		"default_icon": {
 			"16": "icons/bookmark_search_16.png",
