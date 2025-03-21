@@ -31,11 +31,15 @@ define([
 			dateStr = "0" + dateStr;
 		}
 
+		const faviconUrl = new URL(chrome.runtime.getURL("/_favicon/"));
+		faviconUrl.searchParams.set("pageUrl", siteUrl);
+		faviconUrl.searchParams.set("size", "24");
+
 		return Mustache.render(bookmarkTemplate, {
 			url: bookmark.url,
 			title: bookmark.title,
 			score: score,
-			faviconUrl: "chrome://favicon/" + siteUrl,
+			faviconUrl: faviconUrl.toString(),
 			rowClass: rowType.cssClass,
 			folders: bookmark.folders,
 			resultTypeName: rowType.name,

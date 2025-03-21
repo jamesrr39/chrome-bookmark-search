@@ -12,9 +12,12 @@ GPL v2. See the LICENCE file. For a quick explaination, this summarises it quite
 
 ## Installation
 
-Currently not available on the play store, to install this extension download either as a zip (and extract), or through git.
+Either install from the [Chrome Webstore](https://chrome.google.com/webstore/detail/bookmark-search/fcjphnojgeikgjajhlihdjnljnbpfhmi), or side-load it.
 
-Then open the chrome browser, go to `chrome://extensions`, click `Load unpacked extension`, navigate to the project folder, and select the 'src' folder.
+To side load:
+
+- Download either as a zip (and extract), or through git.
+- Open the chrome browser, go to `chrome://extensions`, click `Load unpacked extension`, navigate to the project folder, and select the 'src' folder.
 
 The extension should then appear in Chrome with your other extensions.
 
