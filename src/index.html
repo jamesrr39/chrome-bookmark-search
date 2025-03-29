@@ -1,9 +1,8 @@
 <!doctype html>
 <html>
 	<head>
-		<title>My View</title>
-
-		<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css" type="text/css" />
+		<title>Bookmark search</title>
+		<link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.css" />
 		<style>
 			body {
 				width: 400px;
@@ -34,21 +33,12 @@
 	</head>
 	<body>
 		<div>
-			<div class="input-group">
-				<input type="text" class="form-control search" placeholder="Start typing to search..." id="searchTermInput">
-				<div class="input-group-btn">
-					<span class="btn btn-default">
-						<i class="glyphicon glyphicon-search"></i>
-					</span>
-				</div>
-			</div>
-			<ul class="list-unstyled" id="bookmarksListing">
-			</ul>
+			<div id="app"></div>
 			<div class="bottom-banner">
 				<a target="_blank" href="https://github.com/jamesrr39/chrome-bookmark-search/blob/master/docs/wiki/wiki.md">Tips</a> |
 				<a target="_blank" href="docs/acknowledgements.html">Acknowledgements</a>
 			</div>
 		</div>
-		<div id="app"></div>
+		<script src="main.js"></script>
 	</body>
 </html>

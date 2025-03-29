@@ -1,36 +1,56 @@
 {
     "compilerOptions": {
-      "allowSyntheticDefaultImports": true,
-      "esModuleInterop": true,
-      "jsx": "react",
-      "module": "es2015",
-      "moduleResolution": "node",
-      "noImplicitReturns": true,
-      "noUnusedLocals": true,
-      "outDir": "./dist",
-      "skipLibCheck": true,
-      "sourceMap": true,
+      "rootDir": "src",
+      "outDir": "dist",
       "strict": true,
       "target": "es2018",
-      "types": ["chrome"],
-      "paths": {
-        "react": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/compat/"],
-        "react/jsx-runtime": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/jsx-runtime"],
-        "react-dom": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/compat/"],
-        "react-dom/*": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/compat/*"]
+      
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
 
-        // "react": ["./node_modules/preact/compat/"],
-        // "react/jsx-runtime": ["./node_modules/preact/jsx-runtime"],
-        // "react-dom": ["./node_modules/preact/compat/"],
-        // "react-dom/*": ["./node_modules/preact/compat/*"]
-      }
-    },
+      "jsx": "react-jsx",
+      "jsxImportSource": "preact",
+
+      "paths": {
+        "react": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/compat"],
+        "preact": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact"],
+        "react/jsx-runtime": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/jsx-runtime"],
+        "react-dom": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/compat"],
+        "react-dom/*": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/compat/*"],
+        "preact/jsx-runtime": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/jsx-runtime"],
+      },
+
+    // "jsx": "react",
+    // "jsxFactory": "h",
+    // "jsxFragmentFactory": "Fragment",
+
+      // "jsx": "react-jsx",
+      // "jsxImportSource": "preact",
+      "module": "es2015",
+      "moduleResolution": "node",
+      "lib": [
+        "ESNext",
+        "DOM"
+      ],
+      
+      // "noUnusedLocals": true,
+      "skipLibCheck": true,
+      "sourceMap": true,
+      // "types": ["chrome"],
+      // "paths": {
+      //   "react": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/compat/"],
+      //   "react/jsx-runtime": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/jsx-runtime"],
+      //   "react-dom": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/compat/"],
+      //   "react-dom/*": ["./.yarn/unplugged/preact-npm-10.26.4-e97fe426c5/node_modules/preact/compat/*"]
+      // },
+
+      // "typeRoots": [
+      //   // "./.yarn/unplugged/@types-chrome-npm-0.0.308-3e45236465/node_modules"
+      //   ".yarn/unplugged"
+      // ],
     
-    "typeRoots": [
-      "./node_modules",
-      "./.yarn/unplugged/@types-chrome-npm-0.0.308-3e45236465/node_modules"
-    ],
-    "include": [
-       "./.yarn/unplugged/@types-chrome-npm-0.0.308-3e45236465/node_modules/@types/chrome/index.d.ts"
-    ]
+    },
+    // "include": [
+    //    "./.yarn/unplugged/@types-chrome-npm-0.0.308-3e45236465/node_modules/@types/chrome/index.d.ts"
+    // ]
   }

@@ -3,7 +3,6 @@
 	"description": "bookmark search extension for google chrome",
 	"version": "0.0.1",
 	"private": true,
-	"author": "jr39.dev@gmail.com",
 	"main": "index.js",
 	"repository": "https://github.com/jamesrr39/chrome-bookmark-search.git",
 	"license": "GPL-2.0-only",
@@ -19,10 +18,19 @@
 		},
 		"preact@10.26.4": {
 			"unplugged": true
+		},
+		"preact-jsx-runtime@1.2.0": {
+			"unplugged": true
 		}
 	},
 	"dependencies": {
+		"esbuild": "^0.25.1",
 		"lunr": "^2.3.9",
-		"preact": "^10.26.4"
+		"preact": "^10.26.4",
+		"preact-jsx-runtime": "^1.2.0"
+	},
+	"scripts": {
+		"dev": "tsc -w ",
+		"esbuild": "cp src/index.html dist/ && cp src/manifest.json dist/ && cp -r src/icons dist/ && cp -r src/bootstrap dist/ && esbuild src/main.tsx --bundle --watch --sourcemap --outfile=dist/main.js"
 	}
 }
