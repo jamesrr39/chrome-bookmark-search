@@ -30,7 +30,12 @@
 		"preact-jsx-runtime": "^1.2.0"
 	},
 	"scripts": {
-		"dev": "tsc -w ",
-		"esbuild": "cp src/index.html dist/ && cp src/manifest.json dist/ && cp -r src/icons dist/ && cp -r src/bootstrap dist/ && esbuild src/main.tsx --bundle --watch --sourcemap --outfile=dist/main.js"
+		"clean": "rm -rf dist/*",
+		"copy-non-js-assets": "cp src/index.html dist/ && cp src/manifest.json dist/ && cp -r src/icons dist/ && cp -r src/bootstrap dist/",
+		"esbuild": "esbuild src/main.tsx --bundle --sourcemap --outfile=dist/main.js",
+		"config-mock": "rm -f src/dal/bookmarkFetcher.ts && ln -s mockBookmarkFetcher.ts src/dal/bookmarkFetcher.ts",
+		"config-prod": "rm -f src/dal/bookmarkFetcher.ts && ln -s chromeBookmarkFetcher.ts src/dal/bookmarkFetcher.ts",
+		"dev": "yarn clean && yarn copy-non-js-assets && yarn config-mock && yarn esbuild --watch",
+		"build": "yarn clean && yarn copy-non-js-assets && yarn config-prod && yarn esbuild"
 	}
 }

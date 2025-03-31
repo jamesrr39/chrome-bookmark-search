@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
-import { fetchBookmarks } from "../dal/mockBookmarkFetcher";
-// import { fetchBookmarks } from "../dal/chromeBookmarkFetcher";
+// import { fetchBookmarks } from "../dal/mockBookmarkFetcher";
+import { fetchBookmarks } from "../dal/chromeBookmarkFetcher";
 import { Bookmark } from "../types/Bookmark";
 import lunr from "lunr";
 
@@ -64,13 +64,13 @@ export function useFetchBookmarks() {
     return response;
 }
 
-function traverse(bookmark: chrome.bookmarks.BookmarkTreeNode, parentFolders: chrome.bookmarks.BookmarkTreeNode[], onBookmarkFound: (bookmark: Bookmark) => void) {
+function traverse(bookmark: chrome.bookmarks.BookmarkTreeNode & {faviconUrl?: string}, parentFolders: chrome.bookmarks.BookmarkTreeNode[], onBookmarkFound: (bookmark: Bookmark) => void) {
     console.log('parentFolders', parentFolders, bookmark)
 	if (!bookmark.children) {
         // it's a bookmark
 		onBookmarkFound({
 			...bookmark,
-			parentFolders
+			parentFolders,
 		});
         return;
 	}

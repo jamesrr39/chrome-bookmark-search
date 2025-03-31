@@ -26,3 +26,7 @@ for (let i = 1; i <= 100; i++) {
 export async function fetchBookmarks(): Promise<chrome.bookmarks.BookmarkTreeNode[]> {
     return bookmarks;
 }
+
+export function generateFaviconUrl(bookmarkUrl: string): string{
+    return '';
+}
