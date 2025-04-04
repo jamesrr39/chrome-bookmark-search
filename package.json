@@ -30,7 +30,7 @@
 		"preact-jsx-runtime": "^1.2.0"
 	},
 	"scripts": {
-		"clean": "rm -rf dist/*",
+		"clean": "mkdir -p dist && rm -rf dist/*",
 		"copy-non-js-assets": "cp src/index.html dist/ && cp src/manifest.json dist/ && cp -r src/icons dist/ && cp -r src/bootstrap dist/",
 		"esbuild": "esbuild src/main.tsx --bundle --sourcemap --outfile=dist/main.js",
 		"config-mock": "rm -f src/dal/bookmarkFetcher.ts && ln -s mockBookmarkFetcher.ts src/dal/bookmarkFetcher.ts",

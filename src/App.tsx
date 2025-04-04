@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { Bookmark } from './types/Bookmark';
 import { useFetchBookmarks } from './hooks/fetchBookmarksHook';
-import lunr from 'lunr';
 import { debounceLater } from './Debouncer';
 import { generateFaviconUrl } from './dal/bookmarkFetcher';
 
