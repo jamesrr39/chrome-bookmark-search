@@ -9,7 +9,7 @@ type FetchResponse<T> = {
     isLoading: boolean
 }
 
-type BookmarkByUrlMap = Map<string, Bookmark>;
+export type BookmarkByUrlMap = Map<string, Bookmark>;
 
 type FetchResponseData = {
     bookmarkMap: BookmarkByUrlMap,
