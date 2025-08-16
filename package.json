@@ -36,6 +36,7 @@
 		"config-mock": "rm -f src/dal/bookmarkFetcher.ts && ln -s mockBookmarkFetcher.ts src/dal/bookmarkFetcher.ts",
 		"config-prod": "rm -f src/dal/bookmarkFetcher.ts && ln -s chromeBookmarkFetcher.ts src/dal/bookmarkFetcher.ts",
 		"dev": "yarn clean && yarn copy-non-js-assets && yarn config-mock && yarn esbuild --watch",
-		"build": "yarn clean && yarn copy-non-js-assets && yarn config-prod && yarn esbuild"
+		"build": "yarn clean && yarn copy-non-js-assets && yarn config-prod && yarn esbuild",
+		"package": "yarn build && mkdir -p build && cd dist && zip -r bookmark-search.zip ./*"
 	}
 }
